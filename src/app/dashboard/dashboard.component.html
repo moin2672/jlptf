@@ -1,0 +1,134 @@
+<!-- ADD MEMBER BUTTON -->
+<div class="container">
+<div class="row" *ngIf="userIsAuthenticated">
+
+<div class="col-md-6"></div>
+<div class="col-md-6">
+<button class="btn btn-danger btn-lg my-3 float-end  d-print-none" [routerLink]="['/upload']"> 
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+</svg> 
+Upload Data</button>
+
+<button class="btn btn-primary btn-lg my-3 float-end mx-3 d-print-none" [routerLink]="['/content/group']"> 
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
+<path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+<path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
+</svg> 
+Print All</button>
+
+</div>
+</div>
+
+
+
+</div>
+<div class="container px-4 py-5" id="custom-cards">
+
+
+<h1 class="text-primary">Dashboard</h1>
+
+<div class="row align-items-stretch g-4 py-5">
+  <div class="col">
+    <div
+      class="
+        card card-cover
+        h-100
+        overflow-hidden
+        text-bg-dark
+        rounded-4
+        shadow-lg
+      "
+(click)="getTotalContents('')"
+
+      style="background-image: url('../../assets/content.webp');background-size: cover;
+  "
+    >
+      <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+        <div class="row">
+          <div class="col">
+            <h6 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+              No. of Contents
+            </h6>
+          </div>
+          <div class="col">
+            <h1 class="pt-5 mt-2 mb-4 display-1 lh-1 fw-bold">{{totalContents}}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div
+      class="
+        card card-cover
+        h-100
+        overflow-hidden
+        text-bg-dark
+        rounded-4
+        shadow-lg
+      "
+      style="background-image: url('../../assets/lesson.webp');background-size: cover;"
+      (click)="getTotalLessons()"
+    >
+      <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+      <div class="row">
+      <div class="col">
+        <h6 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+          No. of Lessons&nbsp;
+        </h6>
+      </div>
+      <div class="col">
+        <h1 class="pt-5 mt-2 mb-4 display-1 lh-1 fw-bold">{{totalLessons}}</h1>
+      </div>
+    </div>
+        
+      </div>
+    </div>
+  </div>
+  <!--<div class="col">
+   <div
+    class="
+      card card-cover
+      h-100
+      overflow-hidden
+      text-bg-dark
+      rounded-4
+      shadow-lg
+    "
+    style="background-image: url('https://lh3.googleusercontent.com/fife/AAbDypBIRPamvn4V0U2TopFdcderlbsKNa56_OJEqDJp2lLSoB6hgw42zsi6fo7VlyMSkHbrKa02_XUtrv4WuXkpgbKuMw7u2FpWCWGxThwuVW6d1DY8s5miW911qStSIeJhC0J-YexvaXFmowvZJCCCLNGRdGpRsjwybT-sOvHWqc4xMCJ_0eLwYndKALznQU_YkZXgOyAqels-FcyWoaU1uDfdLP6HXO852IpE17EWgn8DY4QawJxmc6LxS9EL9pEbnK1sE6ivDXwsLJSwq2YYXL5bd4OT55TbkXID6G_XrjcLbJWHERLnOntFBMlUHte2-Wb1RH5kUnpabxZ5WkaKoC43N_FPKTsDz7SMtgEWvGsyHujApbepMKTwHIx6GMPukLkPpqBcfUShWM2OjhPkiBYi5gw__eFu9zmhEWgNaYnQwBgqGyBQh_rCDqZJ_XWoqFGEpHtuujJiciaeiXEhiaOh37_7x750KVUo8LldjW-K6OlV5ygQ8AUAjDYGwUpaa3s63vQSWxAUiIBFdG-XG0WXDk-I7LXH3QbKiFTbjbXWb6PSSm_HF0um1PiBAhc_PW5aQueQI7rKUjxGGxKFnOVZfLC6ARlSd0qJ1ITWPdfmss7i5MtE9lv38Ai4J9qbxWW_uP8PKQgVeSzkwnIQro0UIG3x06TBN5PIdQSghoLV1LIugAZgRgms_YfKbvzWM0cs8fwhn9M2vw9wji1MaDdTEzC7MStqla_-MKYgP5N7F-5B2LsxYThc4iyN89-PhNcVCIiPu_PLmFhFgI1O_xg8Ww8SmDczqHvcP8Wk-Avm6HRlMd9oYkfPyC8-zvCTqScC8MBOsfwT26aqrwnKr8StCeWn8YqVuQ8n7mM6T_zSHW8ejXU3SEUpe1k86bFG7T5ZalLNPmOMPRQLnwiMzUQoRWGPbPcn21ZgmUZZFEpB_P89cKfk6lsEXSsXWiDAY4AKxMo3l9DzZIiVMNaJsPDeEZu5nt75PkXyQAMUVg9fKeP38z9CRSopQUtiPCfKPqfNk3mD_2Bm8OowX5WRwwv04XRUKCdmbKthnYvYtRMp3ugxk8we5cg7tN3jvPh8ZyW1TVbu7AObgQEDc96F3fJhPSdzrZ4VlEkgx3-CGwhT8jNlrSae3-pIwGqE4VsIagR7Ct8QSJD58Ofna6Si95YMT-nt4jXF2h3QySDTt6NOS-qPPLduJS0C2WXK_NmEKTUk-j6LBGKbEbvBGtrPCfN-CKwDhsdSzH1BZTZOWPMIG27RzzQ7C6rHJEurzjWZkUbPgSk51YMXKixvtVEU4CR6ySn1_ShhoFkUmfMvkwP5HJho5x0PQVxV2A6u-C0P23yk0zvLZFEadOXLJLidlBdhLdOqlJhhpVZ5jfSvX1oBLAipTrbWXvWq1a0_t7FpQdP88yMWf-WnKSVry5nuETvtRdEosoWeE9zhRR8XGv2NHIMfEjnAPHJjGSOudUVR0xrlkF3bKixlHnt6vlPDgiIdExRziStkyXJAO4aRQAcLxg8vghMBuVEB5QZZjRkiY91SzWnVE44l38Jtv2VS4dIHWBxZaAoPvFsKPukNSX4WMfafo1q_0hxSt4HlBkOp9nAi_4QsSQeQ6Z7C2o2dg8BWHQ4ijCmobjcELA=w1478-h941');background-size: cover;"
+    (click)="getTotalLessons()"
+  >
+    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+    <div class="row">
+    <div class="col">
+      <h6 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+        No. of Lessons&nbsp;
+      </h6>
+    </div>
+    <div class="col">
+      <h1 class="pt-5 mt-2 mb-4 display-1 lh-1 fw-bold">{{totalLessons}}</h1>
+    </div>
+  </div>
+      
+    </div>
+  </div>
+</div> -->
+</div>
+
+<hr><br>
+<h3 class="text-primary">No. of Contents/Lesson</h3>
+
+<div class="row d-flex align-items-stretch g-4 py-5" >
+<div class="col-md-3 d-flex align-items-stretch" *ngFor="let data of contentsGroupByLesson">
+  <div class="card text-white" 
+  style="background-image: url('../../assets/chapters.jpg');background-size: cover;"
+  (click)="getTotalContents(data._id)">
+    <div class="card-body">
+      <h5 class="card-text">{{data._id}}</h5>
+      <h1 class="card-title float-end">{{data.count}}</h1>
+    </div>
+  </div>
+</div>
+</div>

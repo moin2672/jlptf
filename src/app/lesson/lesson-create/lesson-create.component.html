@@ -1,0 +1,31 @@
+<div class="container">
+<div class="mx-auto my-5 col-md-6">
+
+  <div class="d-flex justify-content-center" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="lesson">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="lessonName"
+        placeholder="Lesson"
+      />
+      <label for="lessonName">Lesson</label>
+    </div>
+
+    <button class="btn btn-primary">{{editMode? 'Update' : 'Add'}} Lesson</button>
+    <button class="btn btn-danger mx-3" [routerLink]="['/lesson']">Cancel</button>
+  </form>
+</div>
+<!-- {{ this.lessonForm.value | json }} -->
+
+
+</div>
+
+
+

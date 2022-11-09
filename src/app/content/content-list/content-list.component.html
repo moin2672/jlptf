@@ -1,0 +1,208 @@
+<div class="container">
+<!-- ADD MEMBER BUTTON -->
+
+<button *ngIf="userIsAuthenticated"
+  class="btn btn-primary btn-lg my-3 float-end d-print-none"
+  [routerLink]="['/content/new']"
+>
+  + Content
+</button>
+
+<!-- IS LOADING COMPONENT -->
+<div class="d-flex justify-content-center d-print-none" *ngIf="isLoading">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<!-- SEARCH BAR -->
+<div class="input-group mb-3 d-print-none">
+  <span class="input-group-text search-my-primary text-white">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-search"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+      /></svg>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>
+  <div class="form-floating">
+    <input
+      type="text"
+      class="form-control"
+      id="searchInput"
+      placeholder="Search...."
+      #searchInput
+    />
+    <label for="searchInput">Search....</label>
+  </div>
+</div>
+<span class="form-text d-print-none" *ngIf="requestedData">
+  Checking : <strong class="text-success"> {{ requestedData }} </strong>
+</span>
+
+<!-- NO OF MEMBERS -->
+<button class="btn btn-outline-primary mt-2 d-print-none" (click)="toggleAns()">{{showAns ? 'Hide Ans': 'Show Ans'}}
+<svg *ngIf="!showAns" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+</svg>
+<svg *ngIf="showAns" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+  <path d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+  <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"/>
+</svg>
+</button>
+<button class="btn btn-outline-primary mx-3 mt-2 d-print-none" (click)="toggleSorting()">
+  {{sortDescending ? 'Sort Ascending' : 'Sort Descending'}}
+  <svg *ngIf="!sortDescending" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+    <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+  </svg>
+  <svg *ngIf="sortDescending" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up-alt" viewBox="0 0 16 16">
+    <path d="M3.5 13.5a.5.5 0 0 1-1 0V4.707L1.354 5.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 4.707V13.5zm4-9.5a.5.5 0 0 1 0-1h1a.5.5 0 0 1 0 1h-1zm0 3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1h-3zm0 3a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1h-5zM7 12.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7a.5.5 0 0 0-.5.5z"/>
+  </svg>
+</button>
+<button class="btn btn-outline-primary mt-2 d-print-none" (click)="shuffleArray()">{{isShuffled ? 'Re Shuffle': 'Shuffle'}}
+<svg *ngIf="!isShuffled" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"/>
+  <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"/>
+</svg>
+<svg *ngIf="isShuffled" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+  <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+  <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+</svg>
+</button>
+
+<p class="text-muted d-print-none" style="float:right">
+  No. of Contents Enrolled: {{ totalPosts }}
+</p>
+<br />
+
+<!-- MEMBERS TABLE -->
+<div class="mx-auto my-5 table-responsive" *ngIf="contents.length > 0">
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-my-primary">
+        <th scope="col">S.No#</th>
+        <th scope="col">Japanese</th>
+        <th scope="col">English Meaning</th>
+        <th scope="col" *ngIf="showAns">English Pronunciation</th>
+        <th scope="col">Tamil Meaning</th>
+        <th scope="col" *ngIf="showAns">Tamil Pronunciation</th>
+        <th scope="col">Lesson Name</th>
+        <th scope="col" class="d-print-none"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let content of contents; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <th scope="row">{{ content.japanese }}</th>
+        <th scope="row">{{ content.eMeaning }}</th>
+        <td *ngIf="showAns">{{ content.ePronunciation }}</td>
+        <td>{{ content.tMeaning }}</td>
+        <td *ngIf="showAns">{{ content.tPronunciation }}</td>
+        <td>{{ content.lessonName }}</td>
+        <td class="d-print-none">
+          <div
+            class="btn-group"
+            *ngIf="userIsAuthenticated && userId == content.creator"
+          >
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-warning"
+              [routerLink]="['/content', 'edit', content._id]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-pencil-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-danger"
+              (click)="OnDelete(content._id)"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash3-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br />
+  <!-- PAGINATION BUTTON SECTION -->
+  <div
+    class="d-print-none float-end"
+    *ngIf="contents.length > 0 && !isLoading"
+  >
+    <ul class="pagination">
+      <li
+        class="page-item pointer"
+        [ngClass]="{ active: backward, disabled: !backward }"
+      >
+        <a class="page-link" (click)="onDecrement()">&laquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link">{{ currentPage }} of {{ totalPages }}</a>
+      </li>
+      <li
+        class="page-item pointer"
+        [ngClass]="{ active: forward, disabled: !forward }"
+      >
+        <a class="page-link" (click)="onIncrement()">&raquo;</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- NO MEMBERS -->
+<br />
+<br />
+<br />
+<br />
+<p class="text-center" *ngIf="contents.length <= 0">
+  <strong>No Content Added</strong>
+</p>
+
+<div class="d-print text-center mb-5" *ngIf="clicked && userIsAuthenticated">
+  <button class="btn btn-primary" (click)="export()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-cloud-download-fill"
+      viewBox="0 0 16 16"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.5a.5.5 0 0 1 1 0V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.354 15.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 14.293V11h-1v3.293l-2.146-2.147a.5.5 0 0 0-.708.708l3 3z"
+      />
+    </svg>
+    Download Contents Data
+  </button>
+</div>
+</div>

@@ -1,0 +1,86 @@
+<div class="container">
+
+
+<div class="mx-auto my-5 col-md-6">
+<form [formGroup]="contentForm" (ngSubmit)="onSubmit()">
+  
+  <div class="form-floating mb-3">
+  <input
+    type="text"
+    class="form-control"
+    formControlName="japanese"
+    placeholder="Japanese Word / Sentence"
+    #searchName
+  />
+  <label for="japanese">Japanese Word / Sentence</label>
+</div>
+<div class="form-floating mb-3">
+<input
+  type="text"
+  class="form-control"
+  formControlName="eMeaning"
+  placeholder="English Meaning"
+/>
+<label for="eMeaning">English Meaning</label>
+</div>
+
+
+<div class="form-floating mb-3">
+<input
+  type="text"
+  class="form-control"
+  formControlName="ePronunciation"
+  placeholder="English Pronunciation"
+/>
+<label for="ePronunciation">English Pronunciation</label>
+</div>
+
+<div class="form-floating mb-3">
+<input
+  type="text"
+  class="form-control"
+  formControlName="tMeaning"
+  placeholder="Tamil Meaning"
+/>
+<label for="tMeaning">Tamil Meaning</label>
+</div>
+
+
+<div class="form-floating mb-3">
+<input
+  type="text"
+  class="form-control"
+  formControlName="tPronunciation"
+  placeholder="Tamil Pronunciation"
+/>
+<label for="tPronunciation">Tamil Pronunciation</label>
+</div>
+
+<div class="form-floating mb-3">
+<input
+  list="lessonNamez"
+  class="form-control"
+  formControlName="lessonName"
+  placeholder="Lesson Name"
+  id="lessonName"
+/>
+<datalist id="lessonNamez">
+  <option *ngFor="let item of lessonName_list" [value]="item.lessonName">
+    {{ item.lessonName }}
+  </option>
+</datalist>
+<label for="lessonNames" class="form-label">Lesson Name</label>
+</div>
+  <button class="btn btn-primary">{{editMode? 'Update' : 'Add'}} Content</button>
+  <button class="btn btn-danger mx-3" [routerLink]="['/content']">Cancel</button>
+</form>
+</div>
+<!-- <hr> -->
+<!-- <br> -->
+<!-- <app-content-list></app-content-list> 
+<br> -->
+
+
+</div>
+
+<!-- {{ this.contentForm.value | json }} -->
